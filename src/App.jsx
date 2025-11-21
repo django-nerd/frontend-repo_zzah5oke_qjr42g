@@ -2,6 +2,7 @@ import Hero from './components/Hero'
 import Modules from './components/Modules'
 import Stakeholders from './components/Stakeholders'
 import Compliance from './components/Compliance'
+import Admin from './components/Admin'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Modules />
       <Stakeholders />
       <Compliance />
+      <Admin />
 
       <footer className="py-10 text-center text-slate-400 bg-slate-950/80">
         <p>Built for modern construction management — secure, scalable, and compliant.</p>
