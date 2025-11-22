@@ -21,6 +21,8 @@ import TasksLanding from './pages/TasksLanding'
 import TaskDetail from './pages/TaskDetail'
 import ApprovalsLanding from './pages/ApprovalsLanding'
 import ApprovalDetail from './pages/ApprovalDetail'
+import DashboardsLanding from './pages/DashboardsLanding'
+import DashboardRouter from './pages/DashboardRouter'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -47,6 +49,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/tasks/:id" element={<TaskDetail />} />
         <Route path="/approvals" element={<ApprovalsLanding />} />
         <Route path="/approvals/:id" element={<ApprovalDetail />} />
+        <Route path="/dashboards" element={<DashboardsLanding />} />
+        <Route path="/dashboard/:role" element={<DashboardRouter />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

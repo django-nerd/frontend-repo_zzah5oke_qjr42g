@@ -1,44 +1,50 @@
 import { Link } from 'react-router-dom'
-import { Briefcase, Wrench, Users, Building2, ShieldCheck, GraduationCap, FileSearch } from 'lucide-react'
+import { HardHat, UserCog, ClipboardCheck, Building, Users, Gavel, ShieldAlert, ArrowRight } from 'lucide-react'
 
 const roles = [
-  { icon: Briefcase, title: 'Contractor', slug: 'contractor', points: ['Productivity', 'Costs', 'Task status'] },
-  { icon: Wrench, title: 'Site Engineer', slug: 'site-engineer', points: ['Checklists', 'Logs', 'Issue reporting'] },
-  { icon: Users, title: 'Project Manager', slug: 'project-manager', points: ['Milestones', 'Budget', 'Workflow approval'] },
-  { icon: Building2, title: 'Client', slug: 'client', points: ['Progress', 'Cost', 'Compliance', 'Change orders'] },
-  { icon: ShieldCheck, title: 'Owner', slug: 'owner', points: ['Portfolio metrics', 'Risk', 'Team details'] },
-  { icon: GraduationCap, title: 'Labourer', slug: 'labourer', points: ['Learning', 'Tasks', 'Attendance', 'Safety'] },
-  { icon: FileSearch, title: 'Government Auditor', slug: 'auditor', points: ['Regulatory docs', 'Audit logs', 'Compliance'] },
+  { slug: 'labour', name: 'Labour', icon: HardHat, desc: 'Assigned work, shifts, safety, and updates' },
+  { slug: 'site_engineer', name: 'Site Engineer', icon: UserCog, desc: 'On-site execution, QA/QC, RFIs' },
+  { slug: 'project_manager', name: 'Project Manager', icon: ClipboardCheck, desc: 'Schedules, risks, reporting' },
+  { slug: 'contractor', name: 'Contractor', icon: Building, desc: 'Crews, materials, work orders' },
+  { slug: 'client', name: 'Client', icon: Users, desc: 'Progress, approvals, communication' },
+  { slug: 'owner', name: 'Owner', icon: Users, desc: 'Portfolio, budgets, health' },
+  { slug: 'auditor', name: 'Auditor', icon: Gavel, desc: 'Compliance and audits' },
+  { slug: 'admin', name: 'Admin', icon: ShieldAlert, desc: 'Access and settings' },
 ]
 
-function Stakeholders() {
+export default function Stakeholders() {
   return (
-    <section className="py-16 md:py-24 bg-slate-950 text-white">
+    <section className="relative py-16 bg-slate-950" id="stakeholders">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold">Stakeholder interfaces & dashboards</h2>
-        <p className="text-slate-300 mt-2 max-w-3xl">Role-based access with tailored dashboards and permissions for every participant — from contractors to auditors — ensuring transparency and compliance.</p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          {roles.map((r) => (
-            <Link to={`/stakeholders/${r.slug}`} key={r.title} className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition block">
-              <r.icon className="w-7 h-7 text-emerald-400" />
-              <h3 className="mt-3 font-semibold text-xl">{r.title}</h3>
-              <ul className="mt-3 space-y-1.5 text-slate-300 text-sm">
-                {r.points.map((p) => (
-                  <li key={p} className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> {p}
-                  </li>
-                ))}
-              </ul>
-              <span className="mt-4 inline-block text-emerald-400">View details →</span>
+        <div className="flex items-end justify-between">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-black">Stakeholder Dashboards</h2>
+            <p className="text-slate-300 mt-3 max-w-2xl">Each role gets a focused dashboard. Try the labour view for a highly visual, icon-first workspace.</p>
+          </div>
+          <Link to="/dashboards" className="hidden sm:inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300">
+            Browse all <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-4 mt-8">
+          {roles.slice(0,4).map(({ slug, name, icon: Icon, desc }) => (
+            <Link key={slug} to={`/dashboard/${slug}`} className="group rounded-xl border border-slate-800 bg-slate-900/40 p-5 hover:bg-slate-900/70">
+              <Icon className="w-6 h-6 text-emerald-400" />
+              <h3 className="mt-3 font-semibold">{name}</h3>
+              <p className="text-sm text-slate-400 mt-1">{desc}</p>
+              <span className="mt-3 inline-flex items-center gap-2 text-emerald-400 group-hover:text-emerald-300">
+                Open <ArrowRight className="w-4 h-4" />
+              </span>
             </Link>
           ))}
         </div>
-        <div className="mt-8">
-          <Link to="/stakeholders" className="text-emerald-400 hover:text-emerald-300">Explore all stakeholders →</Link>
+
+        <div className="sm:hidden mt-4">
+          <Link to="/dashboards" className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300">
+            Browse all <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </section>
   )
 }
-
-export default Stakeholders
