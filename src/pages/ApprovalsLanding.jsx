@@ -1,12 +1,35 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Stamp, Plus } from 'lucide-react'
+import CreateForms from '../components/CreateForms'
+import { RequireAuth } from '../auth/AuthContext'
 
-const approvals = [
-  { id: 'ap-001', title: 'Concrete mix design approval', step: 'PM Approval' },
-  { id: 'ap-002', title: 'Material vendor onboarding', step: 'Legal Review' },
-]
+const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
 
 function ApprovalsLanding() {
+  const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    let cancelled = false
+    async function load() {
+      setLoading(true)
+      setError('')
+      try {
+        const res = await fetch(`${API_BASE}/api/approvals`)
+        const data = await res.json()
+        if (!cancelled) setItems(Array.isArray(data) ? data : [])
+      } catch (e) {
+        if (!cancelled) setError('Failed to load approvals')
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+    load()
+    return () => { cancelled = true }
+  }, [])
+
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -15,24 +38,39 @@ function ApprovalsLanding() {
             <h1 className="text-3xl md:text-4xl font-bold">Approvals</h1>
             <p className="text-slate-300 mt-2">Multi-step workflows with signatures and immutable logs.</p>
           </div>
-          <button className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg">
+          <a href="#create" className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg">
             <Plus className="w-4 h-4" /> New Approval
-          </button>
+          </a>
         </div>
 
-        <div className="mt-8 space-y-3">
-          {approvals.map((a) => (
-            <Link key={a.id} to={`/approvals/${a.id}`} className="flex items-center justify-between bg-white/5 border border-white/10 hover:border-white/20 rounded-xl p-4">
-              <div className="flex items-center gap-3">
-                <Stamp className="w-5 h-5 text-pink-400" />
-                <div>
-                  <p className="font-medium">{a.title}</p>
-                  <p className="text-slate-400 text-sm">ID: {a.id}</p>
+        {error && <p className="mt-4 text-rose-400 text-sm">{error}</p>}
+        {loading ? (
+          <p className="mt-6 text-slate-400">Loading...</p>
+        ) : (
+          <div className="mt-8 space-y-3">
+            {items.map((a) => (
+              <Link key={a.id || a._id} to={`/approvals/${a.id || a._id}`} className="flex items-center justify-between bg-white/5 border border-white/10 hover:border-white/20 rounded-xl p-4">
+                <div className="flex items-center gap-3">
+                  <Stamp className="w-5 h-5 text-pink-400" />
+                  <div>
+                    <p className="font-medium">{a.related_type} • {a.related_id}</p>
+                    <p className="text-slate-400 text-sm">Status: {a.status || 'pending'}</p>
+                  </div>
                 </div>
-              </div>
-              <span className="text-slate-300">{a.step}</span>
-            </Link>
-          ))}
+                <span className="text-slate-300">→</span>
+              </Link>
+            ))}
+            {items.length === 0 && (
+              <div className="text-slate-400">No approvals yet. Create one below.</div>
+            )}
+          </div>
+        )}
+
+        <div id="create" className="mt-12">
+          <h2 className="text-2xl font-semibold mb-3">Quick Create</h2>
+          <RequireAuth>
+            <CreateForms onCreated={() => window.location.reload()} />
+          </RequireAuth>
         </div>
       </div>
     </div>
