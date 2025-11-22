@@ -1,13 +1,14 @@
-import { Briefcase, Wrench, ShieldCheck, Users, Building2, ClipboardCheck, FileSearch, GraduationCap } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Briefcase, Wrench, Users, Building2, ShieldCheck, GraduationCap, FileSearch } from 'lucide-react'
 
 const roles = [
-  { icon: Briefcase, title: 'Contractor', points: ['Productivity', 'Costs', 'Task status'] },
-  { icon: Wrench, title: 'Site Engineer', points: ['Checklists', 'Logs', 'Issue reporting'] },
-  { icon: Users, title: 'Project Manager', points: ['Milestones', 'Budget', 'Workflow approval'] },
-  { icon: Building2, title: 'Client', points: ['Progress', 'Cost', 'Compliance', 'Change orders'] },
-  { icon: ShieldCheck, title: 'Owner', points: ['Portfolio metrics', 'Risk', 'Team details'] },
-  { icon: GraduationCap, title: 'Labourer', points: ['Learning', 'Tasks', 'Attendance', 'Safety'] },
-  { icon: FileSearch, title: 'Government Auditor', points: ['Regulatory docs', 'Audit logs', 'Compliance'] },
+  { icon: Briefcase, title: 'Contractor', slug: 'contractor', points: ['Productivity', 'Costs', 'Task status'] },
+  { icon: Wrench, title: 'Site Engineer', slug: 'site-engineer', points: ['Checklists', 'Logs', 'Issue reporting'] },
+  { icon: Users, title: 'Project Manager', slug: 'project-manager', points: ['Milestones', 'Budget', 'Workflow approval'] },
+  { icon: Building2, title: 'Client', slug: 'client', points: ['Progress', 'Cost', 'Compliance', 'Change orders'] },
+  { icon: ShieldCheck, title: 'Owner', slug: 'owner', points: ['Portfolio metrics', 'Risk', 'Team details'] },
+  { icon: GraduationCap, title: 'Labourer', slug: 'labourer', points: ['Learning', 'Tasks', 'Attendance', 'Safety'] },
+  { icon: FileSearch, title: 'Government Auditor', slug: 'auditor', points: ['Regulatory docs', 'Audit logs', 'Compliance'] },
 ]
 
 function Stakeholders() {
@@ -18,7 +19,7 @@ function Stakeholders() {
         <p className="text-slate-300 mt-2 max-w-3xl">Role-based access with tailored dashboards and permissions for every participant — from contractors to auditors — ensuring transparency and compliance.</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
           {roles.map((r) => (
-            <div key={r.title} className="bg-white/5 border border-white/10 rounded-xl p-6">
+            <Link to={`/stakeholders/${r.slug}`} key={r.title} className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition block">
               <r.icon className="w-7 h-7 text-emerald-400" />
               <h3 className="mt-3 font-semibold text-xl">{r.title}</h3>
               <ul className="mt-3 space-y-1.5 text-slate-300 text-sm">
@@ -28,8 +29,12 @@ function Stakeholders() {
                   </li>
                 ))}
               </ul>
-            </div>
+              <span className="mt-4 inline-block text-emerald-400">View details →</span>
+            </Link>
           ))}
+        </div>
+        <div className="mt-8">
+          <Link to="/stakeholders" className="text-emerald-400 hover:text-emerald-300">Explore all stakeholders →</Link>
         </div>
       </div>
     </section>

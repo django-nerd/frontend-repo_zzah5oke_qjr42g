@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { FileSignature, ShieldCheck, History, Lock } from 'lucide-react'
 
 function Compliance() {
@@ -14,6 +15,9 @@ function Compliance() {
               <li className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-blue-400"/> Regulatory templates & workflows</li>
               <li className="flex items-center gap-2"><Lock className="w-5 h-5 text-blue-400"/> Encryption at rest & in transit</li>
             </ul>
+            <div className="mt-6">
+              <Link to="/compliance" className="text-blue-400 hover:text-blue-300">Open compliance overview →</Link>
+            </div>
           </div>
           <div className="bg-white/5 border border-white/10 rounded-xl p-6">
             <div className="grid grid-cols-2 gap-4 text-sm">

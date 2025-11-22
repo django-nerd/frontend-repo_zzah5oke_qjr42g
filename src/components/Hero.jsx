@@ -24,15 +24,15 @@ function Hero() {
             secure workflows, and role-based dashboards for every stakeholder.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href="#modules" className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-3 rounded-lg shadow transition-colors">
+            <a href="/modules" className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-3 rounded-lg shadow transition-colors">
               Explore Modules
               <ArrowRight className="w-4 h-4" />
             </a>
-            <a href="#request-demo" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-3 rounded-lg border border-white/20 backdrop-blur transition-colors">
+            <a href="/request-demo" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-3 rounded-lg border border-white/20 backdrop-blur transition-colors">
               <Settings className="w-4 h-4" />
               Configure Workflows
             </a>
-            <a href="#pricing" className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-5 py-3 rounded-lg shadow transition-colors">
+            <a href="/pricing" className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-5 py-3 rounded-lg shadow transition-colors">
               Buy
               <ArrowRight className="w-4 h-4" />
             </a>

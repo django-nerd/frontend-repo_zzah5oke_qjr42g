@@ -1,19 +1,23 @@
-import { ClipboardList, CheckCircle2, ShieldCheck, FileSignature, HardHat, Package, FileArchive } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ClipboardList, CheckCircle2, FileArchive } from 'lucide-react'
 
 const modules = [
   {
     icon: ClipboardList,
     title: 'Pre‑Construction',
+    slug: 'pre-construction',
     items: ['E‑tendering', 'Bid preparation', 'Contract management', 'Digital signatures', 'Templates & versioning', 'Audit trails'],
   },
   {
     icon: CheckCircle2,
     title: 'Execution',
+    slug: 'execution',
     items: ['Task allocation', 'Resource tracking', 'Quality validation', 'Safety workflows', 'Snag management', 'Mobile checklists'],
   },
   {
     icon: FileArchive,
     title: 'Post‑Handover',
+    slug: 'post-handover',
     items: ['Digital handover packs', 'Warranties & AMC', 'Sign‑offs', 'Document packs', 'As‑built drawings', 'Customer acceptance'],
   },
 ]
@@ -28,7 +32,7 @@ function Modules() {
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {modules.map((m) => (
-            <div key={m.title} className="bg-white/5 border border-white/10 rounded-xl p-6">
+            <Link to={`/modules/${m.slug}`} key={m.title} className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition block">
               <m.icon className="w-7 h-7 text-blue-400" />
               <h3 className="mt-4 font-semibold text-xl">{m.title}</h3>
               <ul className="mt-3 space-y-2 text-slate-300 text-sm">
@@ -38,8 +42,12 @@ function Modules() {
                   </li>
                 ))}
               </ul>
-            </div>
+              <span className="mt-4 inline-block text-blue-400">View details →</span>
+            </Link>
           ))}
+        </div>
+        <div className="mt-8">
+          <Link to="/modules" className="text-blue-400 hover:text-blue-300">Explore all modules →</Link>
         </div>
       </div>
     </section>
