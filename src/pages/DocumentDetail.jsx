@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom'
-import { ArrowLeft, Clock, History, Signature } from 'lucide-react'
+import { ArrowLeft, Clock, History, BadgeCheck } from 'lucide-react'
 
 function DocumentDetail() {
   const { id } = useParams()
@@ -36,7 +36,7 @@ function DocumentDetail() {
               {approvals.map((a) => (
                 <li key={a.step} className="flex items-center justify-between">
                   <span>{a.step}</span>
-                  <span className="inline-flex items-center gap-2 text-emerald-400"><Signature className="w-4 h-4"/> {a.by} • {a.at}</span>
+                  <span className="inline-flex items-center gap-2 text-emerald-400"><BadgeCheck className="w-4 h-4"/> {a.by} • {a.at}</span>
                 </li>
               ))}
             </ul>
