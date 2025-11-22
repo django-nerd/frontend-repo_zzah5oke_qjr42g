@@ -2,6 +2,7 @@ import Hero from './components/Hero'
 import Modules from './components/Modules'
 import Stakeholders from './components/Stakeholders'
 import Compliance from './components/Compliance'
+import Operations from './components/Operations'
 import Admin from './components/Admin'
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Modules />
       <Stakeholders />
       <Compliance />
+      <Operations />
       <Admin />
 
       <footer className="py-10 text-center text-slate-400 bg-slate-950/80">

@@ -11,6 +11,16 @@ import ComplianceLanding from './pages/ComplianceLanding'
 import AdminLanding from './pages/AdminLanding'
 import PricingLanding from './pages/PricingLanding'
 import RequestDemo from './pages/RequestDemo'
+import ProjectsLanding from './pages/ProjectsLanding'
+import ProjectDetail from './pages/ProjectDetail'
+import DocumentsLanding from './pages/DocumentsLanding'
+import DocumentDetail from './pages/DocumentDetail'
+import RFIsLanding from './pages/RFIsLanding'
+import RFIDetail from './pages/RFIDetail'
+import TasksLanding from './pages/TasksLanding'
+import TaskDetail from './pages/TaskDetail'
+import ApprovalsLanding from './pages/ApprovalsLanding'
+import ApprovalDetail from './pages/ApprovalDetail'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -27,6 +37,16 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/admin" element={<AdminLanding />} />
         <Route path="/pricing" element={<PricingLanding />} />
         <Route path="/request-demo" element={<RequestDemo />} />
+        <Route path="/projects" element={<ProjectsLanding />} />
+        <Route path="/projects/:id" element={<ProjectDetail />} />
+        <Route path="/documents" element={<DocumentsLanding />} />
+        <Route path="/documents/:id" element={<DocumentDetail />} />
+        <Route path="/rfis" element={<RFIsLanding />} />
+        <Route path="/rfis/:id" element={<RFIDetail />} />
+        <Route path="/tasks" element={<TasksLanding />} />
+        <Route path="/tasks/:id" element={<TaskDetail />} />
+        <Route path="/approvals" element={<ApprovalsLanding />} />
+        <Route path="/approvals/:id" element={<ApprovalDetail />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
