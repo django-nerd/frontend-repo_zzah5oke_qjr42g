@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom'
-import { ArrowLeft, Signature, CheckCircle2 } from 'lucide-react'
+import { ArrowLeft, BadgeCheck, CheckCircle2 } from 'lucide-react'
 
 function ApprovalDetail() {
   const { id } = useParams()
@@ -19,7 +19,7 @@ function ApprovalDetail() {
             {steps.map((s) => (
               <li key={s.name} className="flex items-center justify-between">
                 <span className="inline-flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400"/> {s.name}</span>
-                <span className="inline-flex items-center gap-2 text-emerald-400"><Signature className="w-4 h-4"/> {s.by} • {s.at}</span>
+                <span className="inline-flex items-center gap-2 text-emerald-400"><BadgeCheck className="w-4 h-4"/> {s.by} • {s.at}</span>
               </li>
             ))}
           </ul>
