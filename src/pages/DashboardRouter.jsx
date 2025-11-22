@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom'
+import { useParams, Navigate } from 'react-router-dom'
+import { useAuth } from '../auth/AuthContext'
 import DashboardLabour from './DashboardLabour'
 import DashboardEngineer from './DashboardEngineer'
 import DashboardProjectManager from './DashboardProjectManager'
@@ -23,6 +24,11 @@ const map = {
 
 export default function DashboardRouter() {
   const { role } = useParams()
-  const Cmp = map[role] || DashboardLabour
+  const { user } = useAuth()
+
+  if (!user) return <Navigate to="/login" replace />
+  if (role && user.role !== role) return <Navigate to={`/dashboard/${user.role}`} replace />
+
+  const Cmp = map[user.role] || DashboardLabour
   return <Cmp />
 }
